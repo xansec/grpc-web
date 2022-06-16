@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "net/grpc/gateway/examples/echo/echo.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "EchoService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/grpc.gateway.testing.EchoService/ClientStreamingEcho": {
+      "post": {
+        "summary": "A sequence of requests followed by one response (streamed upload).\nThe server returns the total number of messages as the result.",
+        "operationId": "EchoService_ClientStreamingEcho",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/testingClientStreamingEchoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/testingClientStreamingEchoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EchoService"
+        ]
+      }
+    },
+    "/grpc.gateway.testing.EchoService/Echo": {
+      "post": {
+        "summary": "One request followed by one response\nThe server returns the client message as-is.",
+        "operationId": "EchoService_Echo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/testingEchoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/testingEchoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EchoService"
+        ]
+      }
+    },
+    "/grpc.gateway.testing.EchoService/EchoAbort": {
+      "post": {
+        "summary": "Sends back abort status.",
+        "operationId": "EchoService_EchoAbort",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/testingEchoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/testingEchoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EchoService"
+        ]
+      }
+    },
+    "/grpc.gateway.testing.EchoService/FullDuplexEcho": {
+      "post": {
+        "summary": "A sequence of requests with each message echoed by the server immediately.\nThe server returns the same client messages in order.\nE.g. this is how the speech API works.",
+        "operationId": "EchoService_FullDuplexEcho",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/testingEchoResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of testingEchoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/testingEchoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EchoService"
+        ]
+      }
+    },
+    "/grpc.gateway.testing.EchoService/HalfDuplexEcho": {
+      "post": {
+        "summary": "A sequence of requests followed by a sequence of responses.\nThe server buffers all the client messages and then returns the same\nclient messages one by one after the client half-closes the stream.\nThis is how an image recognition API may work.",
+        "operationId": "EchoService_HalfDuplexEcho",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/testingEchoResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of testingEchoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/testingEchoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EchoService"
+        ]
+      }
+    },
+    "/grpc.gateway.testing.EchoService/NoOp": {
+      "post": {
+        "summary": "One empty request, ZERO processing, followed by one empty response\n(minimum effort to do message serialization).",
+        "operationId": "EchoService_NoOp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/testingEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/testingEmpty"
+            }
+          }
+        ],
+        "tags": [
+          "EchoService"
+        ]
+      }
+    },
+    "/grpc.gateway.testing.EchoService/ServerStreamingEcho": {
+      "post": {
+        "summary": "One request followed by a sequence of responses (streamed download).\nThe server will return the same client message repeatedly.",
+        "operationId": "EchoService_ServerStreamingEcho",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/testingServerStreamingEchoResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of testingServerStreamingEchoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/testingServerStreamingEchoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EchoService"
+        ]
+      }
+    },
+    "/grpc.gateway.testing.EchoService/ServerStreamingEchoAbort": {
+      "post": {
+        "summary": "One request followed by a sequence of responses (streamed download).\nThe server abort directly.",
+        "operationId": "EchoService_ServerStreamingEchoAbort",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/testingServerStreamingEchoResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of testingServerStreamingEchoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/testingServerStreamingEchoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EchoService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "testingClientStreamingEchoRequest": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A special value \"\" indicates that there's no further messages."
+        }
+      },
+      "description": "Request type for client side streaming echo."
+    },
+    "testingClientStreamingEchoResponse": {
+      "type": "object",
+      "properties": {
+        "messageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of client messages that have been received."
+        }
+      },
+      "description": "Response type for client side streaming echo."
+    },
+    "testingEchoRequest": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "testingEchoResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "messageCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "testingEmpty": {
+      "type": "object"
+    },
+    "testingServerStreamingEchoRequest": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Message string for server streaming request."
+        },
+        "messageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of messages to be generated before the server\ncloses the stream; default is 10."
+        },
+        "messageInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval (ms) between two server messages. The server implementation\nmay enforce some minimum interval (e.g. 100ms) to avoid message overflow."
+        }
+      },
+      "description": "Request type for server side streaming echo."
+    },
+    "testingServerStreamingEchoResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Response message."
+        }
+      },
+      "description": "Response type for server streaming response."
+    }
+  }
+}
